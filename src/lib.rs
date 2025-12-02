@@ -13,7 +13,7 @@ pub struct Args {
 
 pub fn run<Fun>(name: &str, solve: Fun)
 where
-    Fun: FnOnce(&str),
+    Fun: FnOnce(&str) -> String,
 {
     let args = Args::parse();
 
@@ -23,5 +23,6 @@ where
     let input = fs::read_to_string(&input_path)
         .unwrap_or_else(|_| panic!("Failed to read input file: {}", input_path));
 
-    solve(&input);
+    let solution = solve(&input);
+    println!("{solution}")
 }

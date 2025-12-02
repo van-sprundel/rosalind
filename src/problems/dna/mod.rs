@@ -1,11 +1,13 @@
-pub fn solve(input: &str) {
-    let [mut a_count, mut c_count, mut g_count, mut t_count] = [0, 0, 0, 0];
-    input.chars().for_each(|c| match c {
-        'A' => a_count += 1,
-        'C' => c_count += 1,
-        'G' => g_count += 1,
-        'T' => t_count += 1,
-        _ => {}
+pub fn solve(input: &str) -> String {
+    let [a_count, c_count, g_count, t_count] = input.chars().fold([0usize; 4], |mut acc, c| {
+        acc[match c {
+            'A' => 0,
+            'C' => 1,
+            'G' => 2,
+            'T' => 3,
+            _ => return acc,
+        }] += 1;
+        acc
     });
-    println!("{a_count} {c_count} {g_count} {t_count}")
+    format!("{a_count} {c_count} {g_count} {t_count}")
 }
